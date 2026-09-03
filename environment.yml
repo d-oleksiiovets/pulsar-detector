@@ -21,3 +21,4 @@ dependencies:
       - imbalanced-learn
       - xgboost
       - catboost
+      - -e .
