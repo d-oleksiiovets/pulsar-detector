@@ -1,0 +1,7 @@
+model,use_smote,cv_average_precision_mean,cv_std,best_params
+XGBoost,True,0.9328043748489057,0.012061395218021936,"{'n_estimators': 350, 'learning_rate': 0.03866301375135185, 'max_depth': 4, 'min_child_weight': 2, 'subsample': 0.6709246108557814, 'colsample_bytree': 0.8286062551161397, 'reg_alpha': 1.0295982281045262, 'reg_lambda': 0.3224133776535032}"
+XGBoost,False,0.9321627395525418,0.010728043067662757,"{'n_estimators': 300, 'learning_rate': 0.011335320249167096, 'max_depth': 7, 'min_child_weight': 2, 'subsample': 0.6363811188783234, 'colsample_bytree': 0.9635389303966813, 'reg_alpha': 1.652841375150742, 'reg_lambda': 0.035856012143977975, 'scale_pos_weight': 8.873469493324633}"
+Random Forest,True,0.9307359129314247,0.012640331366710618,"{'n_estimators': 300, 'max_depth': 6, 'min_samples_split': 9, 'min_samples_leaf': 6, 'max_features': 0.4518510662146831}"
+Random Forest,False,0.9305189267381486,0.011814844692083463,"{'n_estimators': 300, 'max_depth': 6, 'min_samples_split': 10, 'min_samples_leaf': 6, 'max_features': 0.7996476113125253, 'class_weight': 'balanced_subsample'}"
+SVM (RBF kernel),False,0.9155959834386899,0.016748238402864,"{'C': 0.9495730103622376, 'gamma': 0.0038244416560763365}"
+SVM (RBF kernel),True,0.9146790009428809,0.017933854458268682,"{'C': 0.4343988304608259, 'gamma': 0.005269972289469782}"

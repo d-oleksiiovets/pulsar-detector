@@ -1,0 +1,7 @@
+Model,Accuracy,Precision,Recall,F1,ROC-AUC,PR-AUC (AP)
+"Random Forest (Optuna, smote)",0.967,0.7679,0.9177,0.8361,0.9777,0.9314
+"XGBoost (Optuna, smote)",0.967,0.772,0.9085,0.8347,0.9765,0.9301
+"Random Forest (Optuna, raw)",0.9704,0.7952,0.9116,0.8494,0.9746,0.9291
+"XGBoost (Optuna, raw)",0.9735,0.8209,0.9085,0.8625,0.9741,0.929
+"SVM (RBF kernel) (Optuna, raw)",0.9793,0.9349,0.8323,0.8806,0.9759,0.9272
+"SVM (RBF kernel) (Optuna, smote)",0.9626,0.7389,0.9146,0.8174,0.975,0.9243
