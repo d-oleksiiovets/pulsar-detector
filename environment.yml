@@ -1,24 +1,31 @@
 name: pulsar-detector
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
   - python=3.11
+  - setuptools
+  - wheel
+  - pip
   - pandas
   - numpy
   - scipy
   - scikit-learn
+  - umap-learn
+  - imbalanced-learn
+  - xgboost
+  - optuna
   - matplotlib
   - seaborn
+  - pillow
   - jupyter
   - ipykernel
   - joblib
-  - pip
+  - pytest
+  - fastapi
+  - uvicorn
+  - pydantic
+  - mlflow
+  - shap
   - pip:
-      - fastapi
-      - uvicorn[standard]
-      - pydantic
-      - pytest
-      - imbalanced-learn
-      - xgboost
-      - catboost
       - -e .
