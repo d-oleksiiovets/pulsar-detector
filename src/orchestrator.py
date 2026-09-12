@@ -11,6 +11,8 @@ from src.data import save_data
 
 @dataclass
 class ModelConfig:
+    """Configuration for a model used in the benchmark."""
+
     name: str
     model_fn: Callable[[dict[str, Any]], Any]
     param_space_fn: Callable[[optuna.Trial, bool], dict[str, Any]]
@@ -30,6 +32,7 @@ def run_benchmark(
     seed: int = 42,
     save_df: bool = False
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, dict[str, Any]]]:
+    """Run hyperparameter optimization and benchmark multiple models."""
 
     artifacts: dict[str, dict[str, Any]] = {}
     summary_records: list[dict[str, Any]] = []

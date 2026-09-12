@@ -10,13 +10,16 @@ from sklearn.metrics import (
     roc_auc_score,
     roc_curve,
 )
+from typing import Any
 from sklearn.model_selection import learning_curve, cross_val_predict
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import math
 
-def compute_metrics(y_true, y_pred, y_score=None, model_name: str | None = None) -> dict[str, np.ndarray]:
+def compute_metrics(y_true: Any, y_pred: Any, y_score=None, model_name: str | None = None) -> dict[str, np.ndarray]:
+    """Compute classification metrics for model evaluation."""
+
     metrics = {
         "Model": model_name or "Model",
         "Accuracy": accuracy_score(y_true, y_pred),
@@ -37,7 +40,9 @@ def compute_metrics(y_true, y_pred, y_score=None, model_name: str | None = None)
     
     return metrics
 
-def plot_roc_curve(y_true, y_score, model_name: str | None = None, ax: plt.Axes | None = None, color: str | None = None,)-> plt.Axes:
+def plot_roc_curve(y_true: Any, y_score: Any, model_name: str | None = None, ax: plt.Axes | None = None, color: str | None = None,)-> plt.Axes:
+    """Plot the ROC curve for a classification model."""
+
     if ax is None:
         _, ax = plt.subplots(figsize=(8, 6))
 
@@ -57,7 +62,9 @@ def plot_roc_curve(y_true, y_score, model_name: str | None = None, ax: plt.Axes 
     return ax
 
 
-def plot_pr_curve(y_true, y_score, model_name: str | None = None, ax: plt.Axes | None = None, color: str | None = None) -> plt.Axes:
+def plot_pr_curve(y_true: Any, y_score: Any, model_name: str | None = None, ax: plt.Axes | None = None, color: str | None = None) -> plt.Axes:
+    """Plot the precision-recall curve for a classification model."""
+
     if ax is None:
         _, ax = plt.subplots(figsize=(8, 6))
 
@@ -77,7 +84,9 @@ def plot_pr_curve(y_true, y_score, model_name: str | None = None, ax: plt.Axes |
     ax.grid(alpha=0.2, color="#cbd5e1")
     return ax
 
-def plot_confusion_matrix(y_true, y_pred, model_name: str | None = None, ax: plt.Axes | None = None) -> plt.Axes:
+def plot_confusion_matrix(y_true: Any, y_pred: Any, model_name: str | None = None, ax: plt.Axes | None = None) -> plt.Axes:
+    """Plot the confusion matrix for a classification model."""
+
     if ax is None:
         _, ax = plt.subplots(figsize=(7, 6))
 
@@ -102,6 +111,8 @@ def plot_embeddings(
     is_categorical: bool = True,
     figsize_per_plot: tuple[int, int] = (6, 5)
 ):
+    """Plot two-dimensional projections of feature embeddings."""
+
     n_plots = len(projections)
     n_cols = min(n_cols, n_plots)
     n_rows = math.ceil(n_plots / n_cols)
@@ -139,14 +150,16 @@ def plot_embeddings(
     return fig, axes
 
 def compute_learning_curve(
-    estimator,
-    X, 
-    y, 
-    cv, 
+    estimator: Any,
+    X: Any, 
+    y: Any, 
+    cv: Any, 
     scoring: str = "average_precision", 
     train_sizes: np.ndarray = np.linspace(0.1, 1.0, 6), 
     n_jobs: int = -1
 ) -> dict[str, np.ndarray]:
+    """Compute training and validation scores across training set sizes."""
+    
     train_sizes_abs, train_scores, val_scores = learning_curve(
         estimator=estimator,
         X=X,
@@ -173,6 +186,7 @@ def plot_learning_curves(
     n_cols: int = 2,
     figsize_per_plot: tuple[int, int] = (6, 5),
 ) -> tuple[plt.Figure, np.ndarray]:
+    """Plot learning curves for multiple models."""
 
     models_with_lc = {
         name: data["learning_curve"]

@@ -21,6 +21,8 @@ EXPECTED_COLUMNS = [
 ]
 
 def load_data(filepath: Optional[Path | str] = None, columns: Optional[List[str]] = None) -> pd.DataFrame:
+    """Load and validate a dataset from a CSV file."""
+
     target_path = Path(filepath) if filepath else DEFAULT_DATA_PATH
 
     if not target_path.exists():
@@ -56,7 +58,9 @@ def load_data(filepath: Optional[Path | str] = None, columns: Optional[List[str]
 
     return df
 
-def split_data(df: pd.DataFrame, test_size=0.2, random_state=42):
+def split_data(df: pd.DataFrame, test_size: float = 0.2, random_state: int = 42) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+    """Split a dataset into stratified training and test sets."""
+
     X = df.drop(columns="target")
     y = df["target"]
 
@@ -68,8 +72,9 @@ def save_data(
     index: bool = False,
     overwrite: bool = True,
     **kwargs,
-) -> Path:
-
+) -> Path: 
+    """Save a DataFrame to a CSV file."""
+    
     if not isinstance(df, pd.DataFrame):
         raise TypeError(f"Expected pd.DataFrame, got {type(df).__name__}")
 
@@ -97,6 +102,8 @@ def save_model(
     overwrite: bool = True,
     compress: int = 3,
 ) -> Path:
+    """Serialize and save an ML model to a file."""
+
     if model is None:
         raise ValueError("Cannot save None as a model.")
 
@@ -121,6 +128,8 @@ def save_model(
     return target_path.resolve()
 
 def load_model(filepath: Union[str, Path] = DEFAULT_MODEL_PATH) -> Any:
+    """Load a serialized ML model from a file."""
+
     target_path = Path(filepath)
     if not target_path.is_absolute():
         target_path = PROJECT_ROOT / target_path

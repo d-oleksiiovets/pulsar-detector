@@ -4,11 +4,15 @@ from api.main import app
 client = TestClient(app)
 
 def test_health():
+    """Test the health check endpoint."""
+
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
 
 def test_predict_valid_input():
+    """Test prediction with valid input data."""
+
     payload = {
         "mean_profile": 140.5, "std_profile": 55.7,
         "kurtosis_profile": -0.2, "skewness_profile": 0.3,
@@ -22,6 +26,8 @@ def test_predict_valid_input():
     assert 0.0 <= body["probability"] <= 1.0
 
 def test_predict_invalid_threshold():
+    """Test prediction with an invalid classification threshold."""
+
     payload = {"mean_profile": 1, "std_profile": 1, "kurtosis_profile": 1,
                "skewness_profile": 1, "mean_dm_snr": 1, "std_dm_snr": 1,
                "kurtosis_dm_snr": 1, "skewness_dm_snr": 1}
@@ -29,5 +35,7 @@ def test_predict_invalid_threshold():
     assert response.status_code == 400
 
 def test_predict_missing_field():
+    """Test prediction with a missing required field."""
+    
     response = client.post("/predict", json={"mean_profile": 1})
     assert response.status_code == 422

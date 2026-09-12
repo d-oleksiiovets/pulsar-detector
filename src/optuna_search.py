@@ -15,6 +15,7 @@ def make_objective(
     use_smote: bool = False,
     scoring: str = "average_precision",
 ) -> Callable[[optuna.Trial], float]:
+    """Create an Optuna objective function for model hyperparameter optimization."""
 
     def objective(trial: optuna.Trial) -> float:
         params = param_space_fn(trial, use_smote)
@@ -51,6 +52,7 @@ def run_search(
     scoring: str = "average_precision",
     seed: int = 42,
 ) -> tuple[optuna.Study, Any]:
+    """Run an Optuna hyperparameter search with MLflow tracking."""
 
     mlflow.set_experiment(experiment_name)
 
